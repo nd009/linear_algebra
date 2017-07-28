@@ -42,7 +42,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             mat = matrix.tolist()
             t = np.array(transpose(mat))
 
-            self.assertEqual(t.shape,(c,r))
+            self.assertEqual(t.shape,(c,r),'Wrong shape')
             self.assertTrue((matrix.T == t).all())
 
 
@@ -65,10 +65,13 @@ class LinearRegressionTestCase(unittest.TestCase):
             r,c = np.random.randint(low=1,high=25,size=2)
             A = np.random.randint(low=-10,high=10,size=(r,c))
             b = np.random.randint(low=-10,high=10,size=(r,1))
+            Amat = A.tolist()
+            bmat = b.tolist()
 
-            Ab = np.array(augmentMatrix(A.tolist(),b.tolist()))
+            Ab = np.array(augmentMatrix(Amat,bmat))
             ab = np.hstack((A,b))
 
+            self.assertTrue(A.tolist() == Amat,"Matrix A shouldn't be modified")
             self.assertTrue((Ab == ab).all())
 
     def test_swapRows(self):
@@ -128,15 +131,14 @@ class LinearRegressionTestCase(unittest.TestCase):
             b = np.arange(r).reshape((r,1))
 
             x = gj_Solve(A.tolist(),b.tolist())
+
             if np.linalg.matrix_rank(A) < r:
                 self.assertEqual(x,None)
             else:
-                # Ax = matxMultiply(A.tolist(),x)
+                self.assertEqual(np.array(x).ndim,2,"x have to be two-dimensional Python List")
                 Ax = np.dot(A,np.array(x))
                 loss = np.mean((Ax - b)**2)
-                # print Ax
-                # print loss
-                self.assertTrue(loss<0.1)
+                self.assertTrue(loss<0.01,"Regression result isn't good enough")
 
 if __name__ == '__main__':
     unittest.main()
