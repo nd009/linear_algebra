@@ -106,7 +106,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
             self.assertTrue((matrix == np.array(mat)).all())
     
-    def test_addScaleRow(self):
+    def test_addScaledRow(self):
 
         for _ in range(10):
             r,c = np.random.randint(low=1,high=25,size=2)
