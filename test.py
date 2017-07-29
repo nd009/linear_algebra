@@ -35,7 +35,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
 
     def test_transpose(self):
-        for _ in range(10):
+        for _ in range(50):
             r,c = np.random.randint(low=1,high=25,size=2)
             matrix = np.random.random((r,c))
 
@@ -48,7 +48,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
     def test_matxMultiply(self):
 
-        for _ in range(10):
+        for _ in range(100):
             r,d,c = np.random.randint(low=1,high=25,size=3)
             mat1 = np.random.randint(low=-10,high=10,size=(r,d)) 
             mat2 = np.random.randint(low=-5,high=5,size=(d,c)) 
@@ -61,7 +61,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
     def test_augmentMatrix(self):
 
-        for _ in range(10):
+        for _ in range(50):
             r,c = np.random.randint(low=1,high=25,size=2)
             A = np.random.randint(low=-10,high=10,size=(r,c))
             b = np.random.randint(low=-10,high=10,size=(r,1))
@@ -125,7 +125,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
     def test_gj_Solve(self):
 
-        for _ in range(10):
+        for _ in range(100):
             r = np.random.randint(low=3,high=10)
             A = np.random.randint(low=-10,high=10,size=(r,r))
             b = np.arange(r).reshape((r,1))
