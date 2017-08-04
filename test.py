@@ -135,6 +135,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             if np.linalg.matrix_rank(A) < r:
                 self.assertEqual(x,None)
             else:
+                self.assertNotEqual(x,None,"Matrix A is not singular")
                 self.assertEqual(np.array(x).ndim,2,"x have to be two-dimensional Python List")
                 Ax = np.dot(A,np.array(x))
                 loss = np.mean((Ax - b)**2)
