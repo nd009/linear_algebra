@@ -133,7 +133,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             x = gj_Solve(A.tolist(),b.tolist())
 
             if np.linalg.matrix_rank(A) < r:
-                self.assertEqual(x,None)
+                self.assertEqual(x,None,"Matrix A is singular")
             else:
                 self.assertNotEqual(x,None,"Matrix A is not singular")
                 self.assertEqual(np.array(x).ndim,2,"x have to be two-dimensional Python List")
