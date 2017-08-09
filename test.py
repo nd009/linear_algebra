@@ -54,7 +54,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             mat2 = np.random.randint(low=-5,high=5,size=(d,c)) 
             dotProduct = np.dot(mat1,mat2)
 
-            dp = np.array(matxMultiply(mat1,mat2))
+            dp = np.array(matxMultiply(mat1.tolist(),mat2.tolist()))
 
             self.assertTrue((dotProduct == dp).all())
 
