@@ -11,7 +11,7 @@ class LinearRegressionTestCase(unittest.TestCase):
         for _ in range(10):
             r,c = np.random.randint(low=1,high=25,size=2)
             matrix = np.random.randint(low=-10,high=10,size=(r,c))
-            self.assertEqual(shape(matrix.tolist()),(r,c))
+            self.assertEqual(shape(matrix.tolist()),(r,c),'Wrong answer')
 
 
     def test_matxRound(self):
@@ -31,7 +31,7 @@ class LinearRegressionTestCase(unittest.TestCase):
                 for j in range(len(mat[0])):
                     res += dec_test[i][j].compare_total(dec_true[i][j])
 
-            self.assertEqual(res,Decimal('0'))
+            self.assertEqual(res,Decimal('0'),'Wrong answer')
 
 
     def test_transpose(self):
@@ -43,7 +43,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             t = np.array(transpose(mat))
 
             self.assertEqual(t.shape,(c,r),'Wrong shape')
-            self.assertTrue((matrix.T == t).all())
+            self.assertTrue((matrix.T == t).all(),'Wrong answer')
 
 
     def test_matxMultiply(self):
@@ -56,7 +56,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
             dp = np.array(matxMultiply(mat1.tolist(),mat2.tolist()))
 
-            self.assertTrue((dotProduct == dp).all())
+            self.assertTrue((dotProduct == dp).all(),'Wrong answer')
 
 
     def test_augmentMatrix(self):
@@ -72,7 +72,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             ab = np.hstack((A,b))
 
             self.assertTrue(A.tolist() == Amat,"Matrix A shouldn't be modified")
-            self.assertTrue((Ab == ab).all())
+            self.assertTrue((Ab == ab).all(),'Wrong answer')
 
     def test_swapRows(self):
         for _ in range(10):
@@ -86,7 +86,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
             matrix[[r1,r2]] = matrix[[r2,r1]]
 
-            self.assertTrue((matrix == np.array(mat)).all())
+            self.assertTrue((matrix == np.array(mat)).all(),'Wrong answer')
 
     def test_scaleRow(self):
 
@@ -104,7 +104,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             scaleRow(mat,rr,scale)
             matrix[rr] *= scale
 
-            self.assertTrue((matrix == np.array(mat)).all())
+            self.assertTrue((matrix == np.array(mat)).all(),'Wrong answer')
     
     def test_addScaledRow(self):
 
@@ -120,7 +120,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             addScaledRow(mat,r1,r2,scale)
             matrix[r1] += scale * matrix[r2]
 
-            self.assertTrue((matrix == np.array(mat)).all())
+            self.assertTrue((matrix == np.array(mat)).all(),'Wrong answer')
 
 
     def test_gj_Solve(self):
