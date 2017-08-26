@@ -50,7 +50,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
         for _ in range(100):
             r,d,c = np.random.randint(low=1,high=25,size=3)
-            mat1 = np.random.randint(low=-10,high=10,size=(r,d)) 
+            mat1 = np.random.randint(low=-10,high=10,size=(r,d))
             mat2 = np.random.randint(low=-5,high=5,size=(d,c)) 
             dotProduct = np.dot(mat1,mat2)
 
