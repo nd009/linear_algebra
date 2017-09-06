@@ -30,6 +30,8 @@ Ctrl + Enter 运行即可。
   + 你的gj_Solve返回了计算结果，但是偏差过大
 
 # 项目提交
+请在提交前确认你的项目已经满足所有[评审标准](https://review.udacity.com/#!/rubrics/871/view), 项目评审人会根据这份标准来给你相应的审阅。
+
 你需要提交以下4个文件, 请注意每个文件的文件名和文件格式。
 
 1. `linear_regression_project.ipynb`: 写有你代码及答案的  ipynb 文件
@@ -79,6 +81,8 @@ The following are some examples of the assersion error.
   + Your gj_Solve has too much error. 
 
 # Project submission
+Before submission, please ensure that your project meets all the requirements in this [rubric](https://review.udacity.com/#!/rubrics/854/view). Reviewer will give reviews according to this rubric.
+
 You should submit the follow four files. Please pay attention to the file names and file types. 
 
 1. `linear_regression_project.ipynb`: the ipynb file with your code and answers. 
