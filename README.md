@@ -34,11 +34,11 @@ Ctrl + Enter 运行即可。
 
 1. `linear_regression_project.ipynb`: 写有你代码及答案的  ipynb 文件
 
-2. `proof.pdf`: 写有你的证明的 pdf 文件。
-
 3. `linear_regression_project.html`: 由 Jupyter notebook 导出的 html 文件
 
 3. `linear_regression_project.py`: 由 Jupyter notebook 导出的 python 文件
+
+2. `proof.pdf`: 写有你的证明的 pdf 文件 （如果你在 ipython notebook中使用 LATEX 完成证明，则不需要提交此文件。）
 
 5. 请不要提交其他任何文件。
 
