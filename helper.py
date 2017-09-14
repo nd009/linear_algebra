@@ -11,8 +11,9 @@ def generateNonSingularMatrix(rank=4):
         if (np.linalg.matrix_rank(matrix) == rank):
             return matrix
 
-def generatePoints(num=100, col=2, outliner=0):
-    m,b = np.random.randint(-5,5,size=col).tolist()
+def generatePoints(num=100):
+    m = np.random.random() * 10 - 5 # -5 ~ 5
+    b = np.random.random() * 10 + 5 # 5 ~ 15
 
     x = np.random.random(size=num) * 10 - 5
     y = x * m + b 
