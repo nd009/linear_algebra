@@ -1,14 +1,9 @@
 import numpy as np 
 
-def generateSingularMatrix(rank=4):
-    matrix = np.random.randint(-10,10,size=(rank,rank))
-    matrix[-1] = np.sum(matrix[:-1], axis =0)
-    return matrix
-
-def generateNonSingularMatrix(rank=4):
+def generateMatrix(rank,singular):
     while True:
         matrix = np.random.randint(-10,10, size=(rank, rank))
-        if (np.linalg.matrix_rank(matrix) == rank):
+        if (np.linalg.matrix_rank(matrix) == rank) ^ (not singular):
             return matrix
 
 def generatePoints(num=100):
