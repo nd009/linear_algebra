@@ -6,6 +6,15 @@ def generateMatrix(rank,singular):
         if (np.linalg.matrix_rank(matrix) == rank) ^ (not singular):
             return matrix
 
+def printInMatrixFormat(rank,A,b):
+    rowFormat = ','.join(["{:>5.0f}"] * rank) + " || {:<5.0f}"     
+    matrixFormat = '\n'.join([rowFormat] * rank)
+    
+    Ab = lambda A,b: [ra+rb for ra,rb in zip(A,b)]
+    flattern = [e for row in Ab(A.tolist(),b.tolist()) for e in row]
+
+    print(matrixFormat.format(*flattern))
+
 def generatePoints(num=100):
     m = np.random.random() * 10 - 5 # -5 ~ 5
     b = np.random.random() * 10 + 5 # 5 ~ 15
