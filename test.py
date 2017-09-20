@@ -130,7 +130,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
     def test_gj_Solve(self):
 
-        for _ in range(100):
+        for _ in range(9999):
             r = np.random.randint(low=3,high=10)
             A = np.random.randint(low=-10,high=10,size=(r,r))
             b = np.arange(r).reshape((r,1))
@@ -144,7 +144,7 @@ class LinearRegressionTestCase(unittest.TestCase):
                 self.assertEqual(np.array(x).ndim,2,"x have to be two-dimensional Python List")
                 Ax = np.dot(A,np.array(x))
                 loss = np.mean((Ax - b)**2)
-                self.assertTrue(loss<0.01,"Regression result isn't good enough")
+                self.assertTrue(loss<0.1,"Regression result isn't good enough")
 
 if __name__ == '__main__':
     unittest.main()
