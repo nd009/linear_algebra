@@ -135,7 +135,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             A = np.random.randint(low=-10,high=10,size=(r,r))
             b = np.arange(r).reshape((r,1))
 
-            x = gj_Solve(A.tolist(),b.tolist())
+            x = gj_Solve(A.tolist(),b.tolist(),epsilon=1.0e-8)
 
             if np.linalg.matrix_rank(A) < r:
                 self.assertEqual(x,None,"Matrix A is singular")
