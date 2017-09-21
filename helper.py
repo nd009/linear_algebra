@@ -4,7 +4,7 @@ def generateMatrix(rank,seed,singular):
     np.random.seed(seed)
     while True:
         matrix = np.random.randint(-10,10, size=(rank, rank))
-        if (np.linalg.matrix_rank(matrix) == rank) ^ (not singular):
+        if (np.linalg.matrix_rank(matrix) != rank) ^ (not singular):
             return matrix
 
 def printInMatrixFormat(rank,A,b):
