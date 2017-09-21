@@ -1,6 +1,6 @@
 import numpy as np 
 
-def generateMatrix(rank,seed,singular):
+def generateMatrix(rank=4,seed=None,singular=False):
     np.random.seed(seed)
     while True:
         matrix = np.random.randint(-10,10, size=(rank, rank))
