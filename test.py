@@ -35,7 +35,7 @@ class LinearRegressionTestCase(unittest.TestCase):
 
 
     def test_transpose(self):
-        for _ in range(50):
+        for _ in range(100):
             r,c = np.random.randint(low=1,high=25,size=2)
             matrix = np.random.random((r,c))
 
