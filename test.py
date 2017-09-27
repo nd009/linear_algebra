@@ -42,7 +42,7 @@ class LinearRegressionTestCase(unittest.TestCase):
             mat = matrix.tolist()
             t = np.array(transpose(mat))
 
-            self.assertEqual(t.shape,(c,r),'Wrong shape')
+            self.assertEqual(t.shape,(c,r),"Expected shape{}, but got shape{}".format((c,r),t.shape))
             self.assertTrue((matrix.T == t).all(),'Wrong answer')
 
 
@@ -141,10 +141,10 @@ class LinearRegressionTestCase(unittest.TestCase):
                 self.assertEqual(x,None,"Matrix A is singular")
             else:
                 self.assertNotEqual(x,None,"Matrix A is not singular")
-                self.assertEqual(np.array(x).ndim,2,"x have to be two-dimensional Python List")
+                self.assertEqual(np.array(x).shape,(r,1),"Expected shape({},1), but got shape{}".format(r,np.array(x).shape))
                 Ax = np.dot(A,np.array(x))
                 loss = np.mean((Ax - b)**2)
-                self.assertTrue(loss<0.1,"Regression result isn't good enough")
+                self.assertTrue(loss<0.1,"Bad result.")
 
 if __name__ == '__main__':
     unittest.main()
