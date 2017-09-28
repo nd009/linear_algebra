@@ -7,9 +7,9 @@ def generateMatrix(rank=4,seed=None,singular=False):
         if (np.linalg.matrix_rank(matrix) != rank) ^ (not singular):
             return matrix
 
-def printInMatrixFormat(Ab):
+def printInMatrixFormat(Ab,padding=7,truncating=3):
     rank = len(Ab)
-    rowFormat = ','.join(["{:>7.3f}"] * rank) + " || {:<7.3f}"     
+    rowFormat = ','.join(["{{:>{}.{}f}}".format(padding,truncating)] * rank) + " || {{:<{}.{}f}}".format(padding,truncating)     
     matrixFormat = '\n'.join([rowFormat] * rank)
 
     flattern = [e for row in Ab for e in row]
