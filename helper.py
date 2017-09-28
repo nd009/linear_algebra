@@ -7,12 +7,12 @@ def generateMatrix(rank=4,seed=None,singular=False):
         if (np.linalg.matrix_rank(matrix) != rank) ^ (not singular):
             return matrix
 
-def printInMatrixFormat(rank,A,b):
-    rowFormat = ','.join(["{:>5.0f}"] * rank) + " || {:<5.0f}"     
+def printInMatrixFormat(Ab):
+    rank = len(Ab)
+    rowFormat = ','.join(["{:>7.3f}"] * rank) + " || {:<7.3f}"     
     matrixFormat = '\n'.join([rowFormat] * rank)
-    
-    Ab = lambda A,b: [ra+rb for ra,rb in zip(A,b)]
-    flattern = [e for row in Ab(A.tolist(),b.tolist()) for e in row]
+
+    flattern = [e for row in Ab for e in row]
 
     print(matrixFormat.format(*flattern))
 
