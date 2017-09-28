@@ -48,7 +48,7 @@ Ctrl + Enter 运行即可。
 
 --- 
 
-# Linear Regression Project
+# Linear Regression Project(in developing, not validable yet)
 
 Welcome to linear regression project.  Linear regression is the basic of many machine learning algorithms. In this project, you will imply what you learn to solve a linear regression problem, without using any external libraries. 
 
