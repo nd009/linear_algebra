@@ -16,6 +16,7 @@ def printInMatrixFormat(rank,A,b):
 
     print(matrixFormat.format(*flattern))
 
+
 def generatePoints(seed=None,num=100):
     np.random.seed(seed)
     m = np.random.random() * 10 - 5 # -5 ~ 5
@@ -25,5 +26,5 @@ def generatePoints(seed=None,num=100):
     y = x * m + b 
     y += np.random.normal(size=num)
 
-    return x,y
+    return x.tolist(),y.tolist()
 
