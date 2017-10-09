@@ -9,7 +9,7 @@ def generateMatrix(rank=4,seed=None,singular=False):
 
 def printInMatrixFormat(Ab,padding=7,truncating=3):
     rank = len(Ab)
-    rowFormat = ','.join(["{{:>{}.{}f}}".format(padding,truncating)] * rank) + " || {{:<{}.{}f}}".format(padding,truncating)     
+    rowFormat = ','.join(["{{:>{}.{}f}}".format(padding,truncating)] * rank) + " || {{:^{}.{}f}}".format(padding,truncating)     
     matrixFormat = '\n'.join([rowFormat] * rank)
 
     flattern = [e for row in Ab for e in row]
