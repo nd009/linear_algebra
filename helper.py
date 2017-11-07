@@ -1,6 +1,6 @@
 import numpy as np 
 
-def generateMatrix(rank=4,seed=None,singular=False):
+def generateMatrix(rank,seed,singular=False):
     np.random.seed(seed)
     while True:
         matrix = np.random.randint(-10,10, size=(rank, rank))
@@ -17,7 +17,7 @@ def printInMatrixFormat(Ab,padding=7,truncating=3):
     print(matrixFormat.format(*flattern))
 
 
-def generatePoints(seed=None,num=100):
+def generatePoints(seed,num=100):
     np.random.seed(seed)
     m = np.random.random() * 10 - 5 # -5 ~ 5
     b = np.random.random() * 10 + 5 # 5 ~ 15
