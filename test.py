@@ -1,13 +1,14 @@
 import unittest
 import numpy as np
+import copy
 
 from decimal import *
+
 
 class LinearRegressionTestCase(unittest.TestCase):
     """Test for linear regression project"""
 
     def test_shape(self):
-
         for _ in range(10):
             r,c = np.random.randint(low=1,high=25,size=2)
             matrix = np.random.randint(low=-10,high=10,size=(r,c))
@@ -33,7 +34,6 @@ class LinearRegressionTestCase(unittest.TestCase):
 
             self.assertEqual(res,Decimal('0'),'Wrong answer')
 
-
     def test_transpose(self):
         for _ in range(100):
             r,c = np.random.randint(low=1,high=25,size=2)
@@ -44,7 +44,6 @@ class LinearRegressionTestCase(unittest.TestCase):
 
             self.assertEqual(t.shape,(c,r),"Expected shape{}, but got shape{}".format((c,r),t.shape))
             self.assertTrue((matrix.T == t).all(),'Wrong answer')
-
 
     def test_matxMultiply(self):
 
@@ -61,8 +60,7 @@ class LinearRegressionTestCase(unittest.TestCase):
         mat1 = np.random.randint(low=-10,high=10,size=(r,5)) 
         mat2 = np.random.randint(low=-5,high=5,size=(4,c)) 
         with self.assertRaises(ValueError,msg="Matrix A\'s column number doesn\'t equal to Matrix b\'s row number"):
-        	matxMultiply(mat1.tolist(),mat2.tolist())
-
+            matxMultiply(mat1.tolist(),mat2.tolist())
 
     def test_augmentMatrix(self):
 
@@ -145,6 +143,84 @@ class LinearRegressionTestCase(unittest.TestCase):
                 Ax = np.dot(A,np.array(x))
                 loss = np.mean((Ax - b)**2)
                 self.assertTrue(loss<0.1,"Bad result.")
+
+
+def addScaledRow(M, r1, r2, scale):
+    m2 = copy.deepcopy(M)
+    scaleRow(m2, r2, scale)
+    rlen, clen = shape(M)
+    for i in range(clen):
+        M[r1][i] += m2[r2][i]
+
+
+def scaleRow(M, r, scale):
+    rlen, clen = shape(M)
+    if scale == 0:
+        raise ValueError("scale cannot be zero")
+    for i in range(clen):
+        M[r][i] *= scale
+
+
+def swapRows(M, r1, r2):
+    rlen, clen = shape(M)
+    for i in range(clen):
+        v_r1 = M[r1][i]
+        v_r2 = M[r2][i]
+        M[r1][i] = v_r2
+        M[r2][i] = v_r1
+
+
+def augmentMatrix(mat1, mat2):
+    rlen1, clen1 = shape(mat1)
+    rlen2, clen2 = shape(mat2)
+    matrix = [[]] * rlen1
+    for i in range(rlen1):
+        matrix[i] = []
+        for j in range(clen1 + clen2):
+            if j < clen1:
+                matrix[i].append(mat1[i][j])
+            if j >= clen1:
+                k = j - clen1
+                matrix[i].append(mat2[i][k])
+    return matrix
+
+
+def matxMultiply(mat1, mat2):
+    rlen1, clen1 = shape(mat1)
+    rlen2, clen2 = shape(mat2)
+    if clen1 != rlen2:
+        raise ValueError("matrix1的列数不等于matrix2的行数，不能进行乘运算")
+    matrix3 = [[]] * rlen1
+    for i in range(rlen1):
+        matrix3[i] = []
+        for j in range(clen2):
+            v_sum = 0
+            for k in range(clen1):
+                v_sum += mat1[i][k] * mat2[k][j]
+            matrix3[i].append(v_sum)
+    return matrix3
+
+
+def transpose(mat):
+    rlen, clen = shape(mat)
+    matrix = [[]] * clen
+
+    for i in range(clen):
+        matrix[i] = []
+        for j in range(rlen):
+            matrix[i].append(mat[j][i])
+    return matrix
+
+
+def shape(M):
+    return len(M), len(M[0])
+
+
+def matxRound(mat, decpts):
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            mat[i][j] = round(mat[i][j], decpts)
+
 
 if __name__ == '__main__':
     unittest.main()
