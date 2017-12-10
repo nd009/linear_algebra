@@ -143,11 +143,10 @@ class LinearRegressionTestCase(unittest.TestCase):
                 self.assertEqual(np.array(x).shape,(r,1),"Expected shape({},1), but got shape{}".format(r,np.array(x).shape))
                 Ax = np.dot(A,np.array(x))
                 loss = np.mean((Ax - b)**2)
-                self.assertTrue(loss<0.1,"Bad result. \nmatrix={}, \nx={}\nb={},\nloss={}".format(A, x, b, loss))
+                self.assertTrue(loss<0.1,"Bad result.")
 
 
 def gj_Solve(A, b, decPts=6, epsilon=1.0e-16):
-    # print("matrix A:\n", A, "\n b=\n", b)
     rlen1, clen1 = shape(A)
     rlen2, clen2 = shape(b)
 
@@ -174,7 +173,6 @@ def gj_Solve(A, b, decPts=6, epsilon=1.0e-16):
             p_ar = matrix[r2][r] * -1
             addScaledRow(matrix, r2, r, p_ar, epsilon)
 
-    print("gauss matrix={}".format(matrix))
     c_count = mclen - 2
     for rj in range((mrlen - 1), 0, -1):
         for r_2 in range((rj - 1), -1, -1):
@@ -183,7 +181,6 @@ def gj_Solve(A, b, decPts=6, epsilon=1.0e-16):
                 continue
             addScaledRow(matrix, r_2, rj, tmp_r_2, epsilon)
         c_count -= 1
-
     x_v = [[0 for col in range(clen2)] for row in range(rlen1)]
     for r_x in range(rlen1):
         for c_x in range(clen2):
@@ -198,7 +195,7 @@ def addScaledRow(M, r1, r2, scale, epsilon=1.0e-16):
     rlen, clen = shape(M)
     for i in range(clen):
         M[r1][i] = M[r1][i] + m2[r2][i]
-        if M[r1][i] > 0 and M[r1][i] < epsilon:
+        if abs(M[r1][i]) < epsilon:
             M[r1][i] = 0.0
 
 
