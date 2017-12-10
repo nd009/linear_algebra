@@ -1,3 +1,4 @@
+# encoding: utf-8
 import unittest
 import numpy as np
 import copy
@@ -142,15 +143,63 @@ class LinearRegressionTestCase(unittest.TestCase):
                 self.assertEqual(np.array(x).shape,(r,1),"Expected shape({},1), but got shape{}".format(r,np.array(x).shape))
                 Ax = np.dot(A,np.array(x))
                 loss = np.mean((Ax - b)**2)
-                self.assertTrue(loss<0.1,"Bad result.")
+                self.assertTrue(loss<0.1,"Bad result. \nmatrix={}, \nx={}\nb={},\nloss={}".format(A, x, b, loss))
 
 
-def addScaledRow(M, r1, r2, scale):
+def gj_Solve(A, b, decPts=6, epsilon=1.0e-16):
+    # print("matrix A:\n", A, "\n b=\n", b)
+    rlen1, clen1 = shape(A)
+    rlen2, clen2 = shape(b)
+
+    if clen1 != rlen2:
+        return None
+    matrix = augmentMatrix(A, b)
+    mrlen, mclen = shape(matrix)
+
+    for r in range(mrlen):
+        for r_t in range(r, mrlen):
+            if matrix[r_t][r] != 0:
+                if r_t != r:
+                    swapRows(matrix, r, r_t)
+                break
+        if matrix[r][r] == 0:
+            return None
+        p_a = matrix[r][r]
+        scaleRow(matrix, r, 1.0 / p_a)
+        if r == mrlen - 1:
+            break
+        for r2 in range(r + 1, mrlen):
+            if matrix[r2][r] == 0:
+                continue
+            p_ar = matrix[r2][r] * -1
+            addScaledRow(matrix, r2, r, p_ar, epsilon)
+
+    print("gauss matrix={}".format(matrix))
+    c_count = mclen - 2
+    for rj in range((mrlen - 1), 0, -1):
+        for r_2 in range((rj - 1), -1, -1):
+            tmp_r_2 = matrix[r_2][c_count] * -1
+            if tmp_r_2 == 0:
+                continue
+            addScaledRow(matrix, r_2, rj, tmp_r_2, epsilon)
+        c_count -= 1
+
+    x_v = [[0 for col in range(clen2)] for row in range(rlen1)]
+    for r_x in range(rlen1):
+        for c_x in range(clen2):
+            x_v[r_x][c_x] = round(matrix[r_x][mclen - 1], decPts)
+    return x_v
+
+
+def addScaledRow(M, r1, r2, scale, epsilon=1.0e-16):
     m2 = copy.deepcopy(M)
     scaleRow(m2, r2, scale)
+    # print("m2 is \n", m2)
     rlen, clen = shape(M)
     for i in range(clen):
-        M[r1][i] += m2[r2][i]
+        M[r1][i] = M[r1][i] + m2[r2][i]
+        if M[r1][i] > 0 and M[r1][i] < epsilon:
+            M[r1][i] = 0.0
 
 
 def scaleRow(M, r, scale):
@@ -158,7 +207,7 @@ def scaleRow(M, r, scale):
     if scale == 0:
         raise ValueError("scale cannot be zero")
     for i in range(clen):
-        M[r][i] *= scale
+        M[r][i] = M[r][i] * scale
 
 
 def swapRows(M, r1, r2):
@@ -173,15 +222,15 @@ def swapRows(M, r1, r2):
 def augmentMatrix(mat1, mat2):
     rlen1, clen1 = shape(mat1)
     rlen2, clen2 = shape(mat2)
-    matrix = [[]] * rlen1
+    clen3 = clen1 + clen2
+    matrix = [[0 for col in range(clen3)] for row in range(rlen1)]
     for i in range(rlen1):
-        matrix[i] = []
-        for j in range(clen1 + clen2):
+        for j in range(clen3):
             if j < clen1:
-                matrix[i].append(mat1[i][j])
+                matrix[i][j] = mat1[i][j]
             if j >= clen1:
                 k = j - clen1
-                matrix[i].append(mat2[i][k])
+                matrix[i][j] = mat2[i][k]
     return matrix
 
 
