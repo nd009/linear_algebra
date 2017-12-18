@@ -60,8 +60,10 @@ class LinearRegressionTestCase(unittest.TestCase):
 
         mat1 = np.random.randint(low=-10,high=10,size=(r,5)) 
         mat2 = np.random.randint(low=-5,high=5,size=(4,c)) 
+        mat3 = np.random.randint(low=-5,high=5,size=(6,c)) 
         with self.assertRaises(ValueError,msg="Matrix A\'s column number doesn\'t equal to Matrix b\'s row number"):
         	matxMultiply(mat1.tolist(),mat2.tolist())
+        	matxMultiply(mat1.tolist(),mat3.tolist())
 
 
     def test_augmentMatrix(self):
