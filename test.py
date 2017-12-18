@@ -63,6 +63,7 @@ class LinearRegressionTestCase(unittest.TestCase):
         mat3 = np.random.randint(low=-5,high=5,size=(6,c)) 
         with self.assertRaises(ValueError,msg="Matrix A\'s column number doesn\'t equal to Matrix b\'s row number"):
         	matxMultiply(mat1.tolist(),mat2.tolist())
+        with self.assertRaises(ValueError,msg="Matrix A\'s column number doesn\'t equal to Matrix b\'s row number"):
         	matxMultiply(mat1.tolist(),mat3.tolist())
 
 
