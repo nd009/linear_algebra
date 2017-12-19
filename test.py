@@ -55,7 +55,8 @@ class LinearRegressionTestCase(unittest.TestCase):
             dotProduct = np.dot(mat1,mat2)
 
             dp = np.array(matxMultiply(mat1.tolist(),mat2.tolist()))
-
+            self.assertEqual(dotProduct.shape, dp.shape,
+                             'Wrong answer, expected shape{}, but got shape{}'.format(dotProduct.shape, dp.shape))
             self.assertTrue((dotProduct == dp).all(),'Wrong answer')
 
         mat1 = np.random.randint(low=-10,high=10,size=(r,5)) 
@@ -80,6 +81,8 @@ class LinearRegressionTestCase(unittest.TestCase):
             ab = np.hstack((A,b))
 
             self.assertTrue(A.tolist() == Amat,"Matrix A shouldn't be modified")
+            self.assertEqual(Ab.shape, ab.shape,
+                             'Wrong answer, expected shape{}, but got shape{}'.format(ab.shape, Ab.shape))
             self.assertTrue((Ab == ab).all(),'Wrong answer')
 
     def test_swapRows(self):
